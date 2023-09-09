@@ -19,7 +19,7 @@
 }*/
 
 int main (int argc, char* argv []){
-    int i, j, k, n = 500;
+    int i, j, k, n = 10000;
     int **matrizA, **matrizB, **matrizC;
     LARGE_INTEGER S1, E2;
 
@@ -28,14 +28,14 @@ int main (int argc, char* argv []){
 
     // Inicializando matrices
     matrizA = (int **)malloc(n*sizeof(int *));
+    matrizB = (int **)malloc(n*sizeof(int *));
+    matrizC = (int **)malloc(n*sizeof(int *));
     for (i=0; i<n; i++)
         *(matrizA + i) = (int *)malloc(n*sizeof(int *));
 
-    matrizB = (int **)malloc(n*sizeof(int *));
     for (i=0; i<n; i++)
         *(matrizB + i) = (int *)malloc(n*sizeof(int *));
 
-    matrizC = (int **)malloc(n*sizeof(int *));
     for (i=0; i<n; i++)
         *(matrizC + i) = (int *)malloc(n*sizeof(int *));
     
@@ -57,6 +57,41 @@ int main (int argc, char* argv []){
                 matrizC[i][j] += matrizA[i][k] * matrizB[k][j];
         }
     }
+
+    /*for (j=0; j<n; j++){
+        for (i=0; i<n; i++){
+            for (k=0; k<n; k++)
+                matrizC[i][j] += matrizA[i][k] * matrizB[k][j];
+        }
+    }*/
+
+    /*for (i=0; i<n; i++){
+        for (k=0; k<n; k++){
+            for (j=0; j<n; j++)
+                matrizC[i][j] += matrizA[i][k] * matrizB[k][j];
+        }
+    }*/
+
+    /*for (k=0; k<n; k++){
+        for (j=0; j<n; j++){
+            for (i=0; i<n; i++)
+                matrizC[i][j] += matrizA[i][k] * matrizB[k][j];
+        }
+    }*/
+
+    /*for (j=0; j<n; j++){
+        for (k=0; k<n; k++){
+            for (i=0; i<n; i++)
+                matrizC[i][j] += matrizA[i][k] * matrizB[k][j];
+        }
+    }*/
+
+    /*for (k=0; k<n; k++){
+        for (i=0; i<n; i++){
+            for (j=0; j<n; j++)
+                matrizC[i][j] += matrizA[i][k] * matrizB[k][j];
+        }
+    }*/
 
     QueryPerformanceCounter(&E2);
     //get_walltime(&E2);
