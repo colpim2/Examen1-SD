@@ -1,28 +1,38 @@
+/**      EXAMEN 1: SAXPY
+*@author:
+*- Barrios López Francisco
+*- Castillo Montes Pamela
+*@date: 09 - 09 - 2023
+**/
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 #include<windows.h>
-//#include<sys/time.h>
 
-/*void get_walltime(time_t * wvTime){
-    *wvTime = time(NULL);
-}*/
+/* Código Base */
+    //#include<sys/time.h>      
 
-/*void get_walltime(LARGE_INTEGER *wvTime){
-    QueryPerformanceCounter(&wvTime);
-}*/
+    /*void get_walltime(time_t * wvTime){
+        *wvTime = time(NULL);
+    }*/
 
-/*void get_walltime(double* wvTime){
-    struct timeval tp;
-    gettimeofday(&tp, NULL);
-    *wvTime = (tp.tv_sec + tp.tv_usec/1000000.0);
-}*/
+    /*void get_walltime(LARGE_INTEGER *wvTime){
+        QueryPerformanceCounter(&wvTime);
+    }*/
+
+    /*void get_walltime(double* wvTime){
+        struct timeval tp;
+        gettimeofday(&tp, NULL);
+        *wvTime = (tp.tv_sec + tp.tv_usec/1000000.0);
+    }*/
 
 int main (int argc, char* argv []){
-    int i, j, k, n = 10000;
+    int i, j, k, n = 1000;             //Definición tamaño matriz
     int **matrizA, **matrizB, **matrizC;
     LARGE_INTEGER S1, E2;
 
+    //Frecuencia de reloj: Uso en cronometraje
     LARGE_INTEGER frecuency;
     QueryPerformanceFrequency(&frecuency);
 
@@ -39,7 +49,7 @@ int main (int argc, char* argv []){
     for (i=0; i<n; i++)
         *(matrizC + i) = (int *)malloc(n*sizeof(int *));
     
-    //Llenando matrices
+    //Llenando aleatorio de matrices (0 a 6)
     for(i=0; i<n; i++){
         for(j=0; j<n; j++){
             matrizA[i][j] = rand() % 6;
@@ -48,9 +58,13 @@ int main (int argc, char* argv []){
         }
     }
     
-    //get_walltime(&S1);
-    QueryPerformanceCounter(&S1);
+    //get_walltime(&S1);        //Código Base
+    QueryPerformanceCounter(&S1);   //Inicio de cronometro
 
+    /* Combinaciones */
+    // Descomentar combinación a ocupar
+
+    //Combinación i-j-k  
     for (i=0; i<n; i++){
         for (j=0; j<n; j++){
             for (k=0; k<n; k++)
@@ -58,6 +72,7 @@ int main (int argc, char* argv []){
         }
     }
 
+    //Combinación j-i-k 
     /*for (j=0; j<n; j++){
         for (i=0; i<n; i++){
             for (k=0; k<n; k++)
@@ -65,6 +80,7 @@ int main (int argc, char* argv []){
         }
     }*/
 
+    //Combinación i-k-j
     /*for (i=0; i<n; i++){
         for (k=0; k<n; k++){
             for (j=0; j<n; j++)
@@ -72,6 +88,7 @@ int main (int argc, char* argv []){
         }
     }*/
 
+    //Combinación k-j-i
     /*for (k=0; k<n; k++){
         for (j=0; j<n; j++){
             for (i=0; i<n; i++)
@@ -79,6 +96,7 @@ int main (int argc, char* argv []){
         }
     }*/
 
+    //Combinación j-k-i
     /*for (j=0; j<n; j++){
         for (k=0; k<n; k++){
             for (i=0; i<n; i++)
@@ -86,6 +104,7 @@ int main (int argc, char* argv []){
         }
     }*/
 
+    //Combinación k-i-j 
     /*for (k=0; k<n; k++){
         for (i=0; i<n; i++){
             for (j=0; j<n; j++)
@@ -93,10 +112,11 @@ int main (int argc, char* argv []){
         }
     }*/
 
-    QueryPerformanceCounter(&E2);
-    //get_walltime(&E2);
+    QueryPerformanceCounter(&E2);       //Fin de cronometro
+    //get_walltime(&E2);        //Código base
 
+    //Tiempo de ejecución
     double elapsed_time = (double)(E2.QuadPart - S1.QuadPart)/frecuency.QuadPart;
-    printf("Tiempo método ijk: %f s\n", elapsed_time);
+    printf("Tiempo m%ctodo ijk: %f s\n",130 ,elapsed_time);
     return 0;
 }
